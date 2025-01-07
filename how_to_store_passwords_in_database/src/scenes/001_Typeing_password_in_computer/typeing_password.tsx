@@ -20,7 +20,7 @@ import {
 } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
-    view.fill("#181818");
+    view.fill("#1E1E2E");
     let loginForm = {
         ref: createRef<Rect>(),
         width: createSignal(view.width() * 0.32),

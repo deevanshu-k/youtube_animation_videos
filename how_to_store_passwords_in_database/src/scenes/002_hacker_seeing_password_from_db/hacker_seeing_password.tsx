@@ -21,7 +21,7 @@ import hackerImage from "./hacker.png";
 import database from "./database.png";
 
 export default makeScene2D(function* (view) {
-    view.fill("#181818");
+    view.fill("#1E1E2E");
 
     const mainRectRef = createRef<Rect>();
     const rect1Ref = createRef<Rect>();
@@ -141,7 +141,7 @@ export default makeScene2D(function* (view) {
         </Rect>
     );
 
-    // yield* slideTransition(Direction.Right, 1);
+    yield* slideTransition(Direction.Right, 1);
 
     yield* all(
         rect2Ref().y(300, 2),
@@ -184,7 +184,7 @@ export default makeScene2D(function* (view) {
 
     const bigRiskRectRef = createRef<Rect>();
     view.add(
-        <Rect ref={bigRiskRectRef} width={"100%"} height={"100%"} fill={"#181818"} opacity={0}>
+        <Rect ref={bigRiskRectRef} width={"100%"} height={"100%"} fill={"#1E1E2E"} opacity={0}>
             <Txt text={"Unprotected Data = Big Risk"} fontSize={65} fill={"white"} fontWeight={900} />
         </Rect>
     );
