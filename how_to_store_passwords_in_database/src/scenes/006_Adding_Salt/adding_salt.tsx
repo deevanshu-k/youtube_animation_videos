@@ -105,7 +105,170 @@ export default makeScene2D(function* (view) {
     yield* hashMainNodeRef().opacity(1, 0.5);
 
     // Hash two user password
+    yield* waitFor(1)
     mainHashRef().remove();
+    const mainPswdTxtRef = createRef<Txt>();
+    const pswdWithSalt1TxtRef = createRef<Node>();
+    const pswdWithSalt2TxtRef = createRef<Node>();
+    const dLine1Ref = createRef<Line>();
+    const dLine2Ref = createRef<Line>();
+    const pLine1Ref = createRef<Line>();
+    const pLine2Ref = createRef<Line>();
+    const hashContRef = createRef<Rect>();
+    const hash1Ref = createRef<Txt>();
+    const hash2Ref = createRef<Txt>();
+    view.add(
+        <Node y={120}>
+            <Txt
+                ref={mainPswdTxtRef}
+                x={0}
+                fontSize={28}
+                text={"MyPassword"}
+                fill={"#4FC3F7"}
+            />
+            <Rect
+                ref={pswdWithSalt1TxtRef}
+                opacity={0}
+                layout
+                direction={"row"}
+                x={-200}
+                y={-140}
+            >
+                <Txt fontSize={28} text={"MyPassword"} fill={"#4FC3F7"} />
+                <Txt
+                    fontSize={28}
+                    paddingLeft={25}
+                    paddingRight={25}
+                    text={"+"}
+                    fill={"#4FC3F7"}
+                />
+                <Txt fontSize={28} text={"Salt1"} fill={"#FF7043"} />
+            </Rect>
+            <Rect
+                opacity={0}
+                ref={pswdWithSalt2TxtRef}
+                layout
+                direction={"row"}
+                x={-200}
+                y={140}
+            >
+                <Txt fontSize={28} text={"MyPassword"} fill={"#4FC3F7"} />
+                <Txt
+                    fontSize={28}
+                    paddingLeft={25}
+                    paddingRight={25}
+                    text={"+"}
+                    fill={"#4FC3F7"}
+                />
+                <Txt fontSize={28} text={"Salt2"} fill={"#AB47BC"} />
+            </Rect>
 
-    yield* waitFor(2)
+            <Rect
+                opacity={0}
+                ref={hash2Ref}
+                layout
+                direction={"row"}
+                x={480}
+                y={140}
+            >
+                <Txt
+                    fontSize={30}
+                    text={"92ba2dbf8d4ffd09681b..."}
+                    fill={"#6A1B9A"}
+                />
+            </Rect>
+            <Rect
+                opacity={0}
+                ref={hash1Ref}
+                layout
+                direction={"row"}
+                x={480}
+                y={-140}
+            >
+                <Txt
+                    fontSize={30}
+                    text={"e4250094cde315dad684..."}
+                    fill={"#E64A19"}
+                />
+            </Rect>
+            {/* Password diversion arrows  */}
+            <Line
+                opacity={0}
+                ref={dLine1Ref}
+                lineWidth={3}
+                stroke={"white"}
+                endArrow
+                arrowSize={10}
+                points={[
+                    [-580, -20],
+                    [-400, -110],
+                ]}
+            />
+            <Line
+                opacity={0}
+                ref={dLine2Ref}
+                lineWidth={3}
+                stroke={"white"}
+                endArrow
+                arrowSize={10}
+                points={[
+                    [-580, 20],
+                    [-400, 110],
+                ]}
+            />
+            {/* Hashing arrows */}
+            <Line
+                opacity={0}
+                ref={pLine1Ref}
+                lineWidth={3}
+                stroke={"white"}
+                endArrow
+                arrowSize={10}
+                points={[
+                    [0, -140],
+                    [230, -140],
+                ]}
+            />
+            <Line
+                opacity={0}
+                ref={pLine2Ref}
+                lineWidth={3}
+                stroke={"white"}
+                endArrow
+                arrowSize={10}
+                points={[
+                    [0, 140],
+                    [230, 140],
+                ]}
+            />
+            <Rect
+                opacity={0}
+                ref={hashContRef}
+                x={120}
+                stroke={"white"}
+                lineWidth={4}
+                height={450}
+                width={160}
+                fontSize={26}
+                fill={"green"}
+            >
+                <Txt fill={"white"} text={"Hashing"} fontSize={26} />
+            </Rect>
+        </Node>
+    );
+
+    yield* waitFor(2);
+    yield* sequence(
+        1,
+        mainPswdTxtRef().x(-700, 1),
+        all(dLine1Ref().opacity(1, 1), dLine2Ref().opacity(1, 1)),
+        all(
+            pswdWithSalt1TxtRef().opacity(1, 1),
+            pswdWithSalt2TxtRef().opacity(1, 1)
+        ),
+        all(pLine1Ref().opacity(1, 1), pLine2Ref().opacity(1, 1)),
+        hashContRef().opacity(1, 1),
+        all(hash1Ref().opacity(1, 1), hash2Ref().opacity(1, 1))
+    );
+    yield* waitFor(2);
 });
