@@ -1,5 +1,10 @@
 {
   "version": 0,
-  "timeEvents": [],
+  "timeEvents": [
+    {
+      "name": "Rainbow Table",
+      "targetTime": 5.76024997125772
+    }
+  ],
   "seed": 319443507
 }

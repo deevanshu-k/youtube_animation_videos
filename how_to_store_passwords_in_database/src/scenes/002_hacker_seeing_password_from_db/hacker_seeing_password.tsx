@@ -15,6 +15,7 @@ import {
     Direction,
     slideTransition,
     waitFor,
+    waitUntil,
 } from "@motion-canvas/core";
 
 import hackerImage from "./hacker.png";
@@ -152,6 +153,7 @@ export default makeScene2D(function* (view) {
     );
 
     yield* rect2Txt2Ref().opacity(1, 0.1);
+    yield* waitUntil("data breach")
 
     const rectDataBreachRef = createRef<Rect>();
     const rectTxtDataBreachRef = createRef<Rect>();
@@ -184,11 +186,22 @@ export default makeScene2D(function* (view) {
 
     const bigRiskRectRef = createRef<Rect>();
     view.add(
-        <Rect ref={bigRiskRectRef} width={"100%"} height={"100%"} fill={"#1E1E2E"} opacity={0}>
-            <Txt text={"Unprotected Data = Big Risk"} fontSize={65} fill={"white"} fontWeight={900} />
+        <Rect
+            ref={bigRiskRectRef}
+            width={"100%"}
+            height={"100%"}
+            fill={"#1E1E2E"}
+            opacity={0}
+        >
+            <Txt
+                text={"Unprotected Data = Big Risk"}
+                fontSize={65}
+                fill={"white"}
+                fontWeight={900}
+            />
         </Rect>
     );
 
-    yield* bigRiskRectRef().opacity(1,2);
-    yield* waitFor(4)
+    yield* bigRiskRectRef().opacity(1, 2);
+    yield* waitUntil("Big Risk");
 });

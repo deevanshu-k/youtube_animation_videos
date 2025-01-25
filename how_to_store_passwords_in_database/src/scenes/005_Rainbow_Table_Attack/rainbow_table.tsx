@@ -7,6 +7,7 @@ import {
     sequence,
     slideTransition,
     waitFor,
+    waitUntil,
 } from "@motion-canvas/core";
 
 export default makeScene2D(function* (view) {
@@ -35,6 +36,8 @@ export default makeScene2D(function* (view) {
             />
         </Node>
     );
+
+    yield* slideTransition(Direction.Right, 1);
 
     // Create grid for rainbow table
     const data = [
@@ -120,6 +123,7 @@ export default makeScene2D(function* (view) {
         </Node>
     );
 
+    yield* waitUntil("Rainbow Table")
     yield* all(tableRef().x(-400, 2));
 
     const commands = [
@@ -181,8 +185,6 @@ export default makeScene2D(function* (view) {
         </Node>
     );
     
-    yield* slideTransition(Direction.Right, 1);
-
     yield* sequence(
         1,
         ...terminalRef()
@@ -197,7 +199,5 @@ export default makeScene2D(function* (view) {
         </Rect>
     );
 
-    yield* overlayTxtRef().opacity(1,2)
-
-    yield* waitFor(3)
+    yield* overlayTxtRef().opacity(1,1)
 });

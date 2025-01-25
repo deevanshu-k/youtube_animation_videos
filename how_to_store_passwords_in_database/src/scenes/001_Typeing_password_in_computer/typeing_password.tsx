@@ -89,4 +89,6 @@ export default makeScene2D(function* (view) {
             .to((str = str + i), 0.1)
             .to((str = str.substring(0, str.length - 1) + "*"), 0.1);
     }
+
+    yield* waitUntil("hello")
 });
